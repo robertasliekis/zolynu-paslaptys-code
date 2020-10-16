@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap");
-
 *,
 *::before,
 *::after {
@@ -41,34 +39,13 @@ h6 {
   font-weight: 400;
 }
 
-.font-large {
-  font-size: 20px;
-  line-height: 25px;
-}
-
-.font-regular {
-  font-size: 16px;
-}
-
-.font-small {
-  font-size: 14px;
-}
-
-.font-micro {
-  font-size: 12px;
-}
-
 html,
 body {
   margin: 0;
   padding: 0;
-  font-family: "Kumbh Sans", sans-serif;
+  font-family: "Courier New", sans-serif;
   height: 100%;
   width: 100%;
-}
-
-input {
-  font-family: "Kumbh Sans", sans-serif;
 }
 
 @mixin displayFlex {
@@ -88,6 +65,13 @@ input {
   flex-direction: column;
 }
 
+@mixin positionAbsoluteCenter {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
 .App {
   @include displayFlex();
   background-color: var(--global-color-background);
@@ -98,6 +82,22 @@ input {
   width: 100%;
   height: 100vh;
   position: relative;
+  .page-start {
+    background-color: black;
+  }
+  .page-wrapper {
+    @include positionAbsoluteCenter();
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    transition: 1s all ease;
+    opacity: 0;
+    z-index: 1;
+  }
+  .page-wrapper-animation {
+    opacity: 1;
+    z-index: 2;
+  }
 }
 
 .change-page-buttons {
@@ -108,224 +108,352 @@ input {
   left: 50%;
   width: 100%;
   z-index: 4;
+  h1 {
+    @include positionAbsoluteCenter();
+  }
   .btn {
-    padding: 1rem 2rem;
-    border: 3px solid white;
-    color: white;
-    font-size: 1.5rem;
-    background-color: green;
-  }
-}
-
-.video-container {
-  width: 100%;
-  height: 100%;
-  //animation-name: video-container-animation;
-  animation-duration: 10s;
-  z-index: 1;
-  video {
-    background-position: center;
-    background-size: contain;
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-  }
-  .background-image {
-    background-position: center;
-    height: 100%;
-    width: 100%;
-  }
-  .background-image-video {
-    background: url("./images/video_screenshot.png");
-    background-size: 100% 100%;
-  }
-  .background-image-page1 {
-  }
-  background: url("./images/book_background.jpg");
-  background-size: 100% 100%;
-}
-
-@keyframes video-container-animation {
-  0% {
-    opacity: 0;
-  }
-  40% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
+    padding: 0.5rem 1rem;
+    border: 2px solid grey;
+    color: grey;
+    font-size: 1rem;
   }
 }
 
 .info-containers {
   @include displayFlexColumn();
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
+  position: relative;
   width: 100%;
   height: 100%;
-  animation-name: info-containers-animation;
-  //Original video length
-  //animation-duration: 43s;
-  animation-direction: 3s;
-  animation-fill-mode: forwards;
-  z-index: 2;
-  .container-zones {
-    @include displayFlex();
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    .container {
-      @include displayFlexColumn();
-      width: 50%;
-      height: 100%;
-      .plant {
-        width: 100%;
-        height: 50%;
-        transition: 0.5s all ease;
-        cursor: pointer;
-        border: 3px solid transparent;
-      }
-      .plant:hover {
-        border: 6px solid white;
-      }
+  .hand-image {
+    z-index: 10;
+    @include positionAbsoluteCenter();
+    width: 20rem;
+    height: 20rem;
+    background-image: url("./images/hand.svg");
+    background-position: center;
+    background-size: contain;
+    // border: 1px solid red;
+    background-repeat: no-repeat;
+    transition: 1s all ease;
+    opacity: 0.6;
+    //transform: translate(-100%, -100%);
+    animation-name: hand-animation;
+    animation-duration: 10s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    //animation-name: ;
+  }
+  @keyframes hand-animation {
+    0% {
+      transform: translate(-50%, -0%);
+    }
+    25% {
+      transform: translate(-190%, -70%) rotate(-45deg);
+    }
+    50% {
+      transform: translate(-50%, -0%);
+    }
+    75% {
+      transform: translate(100%, -70%) rotate(45deg);
+    }
+    100% {
+      transform: translate(-50%, -0%);
     }
   }
-
-  .plant-info-container {
+  .window {
     @include displayFlex();
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
+    @include positionAbsoluteCenter();
     width: 100%;
     height: 100%;
     z-index: 1;
     opacity: 0;
     background-color: rgba(255, 255, 255, 0.5);
     transition: 0.6s all ease;
-    .plant-info-window {
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+      background-position: center;
+      background-size: contain;
+    }
+    .window-content {
       @include displayFlex();
-      position: relative;
-      align-items: flex-start;
-      width: 80%;
-      height: 80%;
-      background-color: var(--global-color-background);
-      border: 2px solid var(--global-color-grey-light);
-      padding: 2rem;
-      .btn-close {
-        position: absolute;
-        right: 2rem;
-        top: 2rem;
-        width: 3rem;
-        height: 3rem;
-        border: 3px solid grey;
-        cursor: pointer;
-        .line-container {
-          position: relative;
-          width: 100%;
-          height: 100%;
-          .line {
-            position: absolute;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            top: 50%;
-            left: 50%;
-            width: 2rem;
-            height: 3px;
-            background-color: grey;
-          }
-          .line:nth-child(2) {
-            transform: translate(-50%, -50%) rotate(45deg);
-          }
-        }
+      @include positionAbsoluteCenter();
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+      padding: 2rem 2.8rem;
+      .video-screen {
+        width: 90%;
+        height: 70%;
+        background-position: center;
+        background-size: cover;
       }
-      .plant-image-container {
+      .content {
+        @include displayFlex();
         width: 50%;
         height: 100%;
         position: relative;
-        overflow: hidden;
-        opacity: 1;
-        transition: 0.5s all ease;
-        .plant-image-carousel {
-          position: absolute;
-          animation: 10s plant-image-container-animation infinite;
-          @include displayFlex();
-          height: 100%;
-          width: 400%;
-          .plant-image {
-            width: calc(100% / 4);
-            height: 100%;
+        .image-container {
+          width: 57%;
+          height: 61%;
+          position: relative;
+          opacity: 1;
+          transition: 0.5s all ease;
+          margin-bottom: 1rem;
+          margin-left: 0.3rem;
+          z-index: -1;
+          .image-frame {
+            @include positionAbsoluteCenter();
+            background-image: url("./images/frame.png");
             background-position: center;
-            background-size: cover;
+            background-size: 100% 100%;
+            width: 115%;
+            height: 110%;
+            z-index: 2;
+          }
+          .image-carousel-overflow {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            .image-carousel {
+              position: absolute;
+              animation: 15s image-carousel-animation infinite;
+              @include displayFlex();
+              height: 100%;
+              width: 500%;
+              z-index: 1;
+              .image {
+                width: calc(100% / 5);
+                height: 100%;
+                background-position: center;
+                background-size: cover;
+              }
+            }
+          }
+        }
+        .text-container {
+          @include displayFlexColumn();
+          position: relative;
+          align-items: flex-start;
+          justify-content: flex-start;
+          width: 100%;
+          height: 100%;
+          text-align: justify;
+          overflow: hidden;
+          transition: 0.5s all ease;
+          //border-left: 1px solid black;
+          padding: 5rem;
+          h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+            width: 100%;
+          }
+          .text-carousel {
+            width: 100%;
+            height: 80%;
+            overflow: hidden;
+            p {
+              text-align: justify;
+              width: 100%;
+              line-height: 1.3rem;
+              height: 100%;
+              column-width: 30rem;
+              overflow: auto;
+              column-gap: 4rem;
+              overflow: visible;
+              white-space: pre-line;
+              transition: 1s all ease;
+              padding-bottom: 2rem;
+            }
+          }
+          .plant-heading {
+            margin-bottom: 2rem;
           }
         }
       }
-      @keyframes plant-image-container-animation {
-        0% {
-          left: 0;
+    }
+
+    .window-buttons {
+      @include positionAbsoluteCenter();
+      top: 82%;
+      width: 100%;
+      z-index: -1;
+      @include displayFlex();
+      .btn {
+        @include displayFlex();
+        align-items: flex-end;
+        width: 50%;
+        height: 17rem;
+        font-size: 2rem;
+        padding-bottom: 7%;
+        justify-content: flex-start;
+        //  border: 3px solid red;
+        .hover-box {
+          height: 36%;
+          width: 65%;
+          transition: 0.5s all ease;
+          // border: 4px solid black;
         }
-        25% {
-          left: 0;
+        .hover-box-left {
+          width: 44%;
+          margin-left: 14%;
         }
-        30% {
-          left: -100%;
-        }
-        60% {
-          left: -100%;
-        }
-        65% {
-          left: -200%;
-        }
-        95% {
-          left: -200%;
-        }
-        100% {
-          left: -300%;
+        .hover-box-right {
+          width: 84%;
+          margin-left: 1%;
         }
       }
-      .plant-text {
-        @include displayFlexColumn();
+      .btn:hover {
+        .hover-box {
+          border: 6px solid black;
+        }
+      }
+    }
+    .window-buttons-animation {
+      transition-delay: 3s;
+      z-index: 3 !important;
+    }
+  }
+  .window-movie {
+    width: 100%;
+    height: 100%;
+    .window-content {
+      background-color: black;
+    }
+    .window-buttons-movie {
+      transform: translate(-50%, -100%);
+      top: 94%;
+      width: 50%;
+      height: 13rem;
+      .btn {
+        @include displayFlex();
+        // border: 1px solid red;
+        width: 33%;
+        color: white;
+        font-size: 3rem;
+      }
+    }
+  }
+  .window-opened {
+    z-index: 2;
+    opacity: 1;
+  }
+}
+
+.info-containers-plants {
+  animation-name: info-containers-animation;
+  animation-direction: 1s;
+  animation-fill-mode: forwards;
+  .video-container {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    .hand-image {
+      @include positionAbsoluteCenter();
+      width: 40rem;
+      height: 40rem;
+      background-image: url("./images/hand.svg");
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.6;
+    }
+    video {
+      background-position: center;
+      background-size: contain;
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+    .background-image {
+      background-position: center;
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .container-zones {
+    @include positionAbsoluteCenter();
+    @include displayFlex();
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    padding: 1rem;
+
+    .plants-wrapper {
+      @include displayFlex();
+      flex-wrap: wrap;
+      width: 100%;
+      height: 100%;
+      .plant {
+        @include displayFlex();
+        font-size: 3rem;
+        width: 50%;
+        height: 50%;
+        transition: 1s all ease;
+        border: 3px solid transparent;
+        z-index: 2;
+        //border: 2px solid green;
+        padding: 1.9%;
+        .hover-box {
+          height: 82%;
+          width: 36.5%;
+          transition: 0.5s all ease;
+          border: 10px solid transparent;
+        }
+      }
+      .plant1,
+      .plant2 {
+        align-items: flex-end;
+      }
+      .plant3,
+      .plant4 {
         align-items: flex-start;
+        .hover-box {
+          height: 82%;
+        }
+      }
+      .plant1,
+      .plant3 {
+        justify-content: flex-end;
+        padding-right: 3.5%;
+      }
+      .plant2,
+      .plant4 {
+        padding-left: 3.5%;
+
         justify-content: flex-start;
+      }
+      .plant:hover {
+        // background-color: rgba(255, 255, 255, 0.5);
+        //border: 10px solid white;
+        .hover-box {
+          border: 40px solid white;
+          opacity: 0.65;
+        }
+      }
+    }
+    .person-wrapper {
+      @include displayFlex();
+      width: 100%;
+      height: 100%;
+      .container {
+        @include displayFlex();
+        //border: 3px solid green;
         width: 50%;
         height: 100%;
-        padding: 1rem;
-        padding-right: 0;
-        text-align: justify;
-        overflow: hidden;
-        transition: 0.5s all ease;
-        p {
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-line-clamp: 20;
-          -webkit-box-orient: vertical;
-          width: 100%;
-        }
-        .plant-heading {
-          margin-bottom: 2rem;
-        }
-        .btn-read-more {
-          border: 2px solid grey;
-          padding: 1rem 2rem;
-          width: fit-content;
-          cursor: pointer;
-          color: grey;
-          font-weight: bold;
-          margin-top: 2rem;
-        }
       }
     }
-    .plant-info-window-clicked {
-      .plant-image-container {
-        width: 0%;
-        height: 0%;
-        opacity: 0;
-      }
-      .plant-text {
-        width: 100%;
-      }
-    }
+  }
+
+  .container-zones-animation {
+    transition-delay: 13s;
+    //transition-delay: 2s;
+    z-index: 2;
   }
   .plant-info-container-clicked {
     width: 100%;
@@ -333,7 +461,104 @@ input {
     opacity: 1;
     z-index: 3;
   }
+  .corner-videos-container {
+    z-index: 1;
+    @include positionAbsoluteCenter();
+    width: 100%;
+    height: 100%;
+    .video-box {
+      position: absolute;
+      height: 50%;
+      width: 45%;
+      //border: 2px solid green;
+      overflow: hidden;
+      video {
+        position: absolute;
+        height: 100vh;
+        width: 100vw;
+        object-fit: fill;
+      }
+      .video-bottom-left {
+        left: 0;
+        bottom: 0;
+      }
+      .video-bottom-right {
+        right: 0;
+        bottom: 0;
+      }
+      .video-top-right {
+        right: 0;
+        top: 0;
+      }
+      .video-top-left {
+        left: 0;
+        top: 0;
+      }
+    }
+    .bottom {
+      bottom: 0%;
+    }
+    .right {
+      right: 0;
+    }
+  }
+  .border-box {
+    @include positionAbsoluteCenter();
+    top: 98.5%;
+    z-index: 1;
+    height: 48%;
+    width: 42%;
+    transition: 0.5s all ease;
+    overflow: hidden;
+  }
+  .border-box-left {
+    transform: translate(0%, -100%);
+    left: 1%;
+    video {
+      left: 0%;
+    }
+  }
+  .border-box-right {
+    transform: translate(-100%, -100%);
+    left: 99%;
+    video {
+      right: 0;
+    }
+  }
+  .border-box-button {
+    @include displayFlex();
+    font-size: 2rem;
+    z-index: 3;
+    border: 3px solid transparent;
+    width: 20%;
+    // border: 1px solid red;
+  }
+
+  .border-box-top {
+    top: 50%;
+    video {
+      top: 200%;
+    }
+  }
+
+  .border-box-top-button {
+    top: 50%;
+  }
 }
+
+// .plant:hover {
+//   border: 6px solid white;
+// }
+
+// .border-box-button:hover {
+//   border: 3px solid white;
+// }
+
+// .person-wrapper {
+//   .container:hover {
+//     border: 3px solid white;
+//   }
+// }
 
 @keyframes info-containers-animation {
   0% {
@@ -349,106 +574,32 @@ input {
   }
 }
 
-.page1 {
-  .container-zones {
-    position: relative;
-    .container {
-      @include displayFlexColumn();
-      padding: 3rem 5rem;
-      padding-top: 5rem;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      cursor: pointer;
-      .media {
-        background-image: url("./images/simkunaite/simkunaite1.jpg");
-        background-position: center;
-        background-size: cover;
-        height: 60%;
-        width: 60%;
-        margin-bottom: 2rem;
-      }
-      .video {
-        width: 100%;
-        background-image: url("./images/simkunaite/simkunaite-video.jpg");
-      }
-      .icons {
-        font-size: 8rem;
-        .icon {
-          margin: 0 1rem;
-        }
-      }
-      .text {
-        text-align: justify;
-        h1 {
-          margin-bottom: 2rem;
-          text-align: center;
-          font-size: 3rem;
-        }
-        p {
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-line-clamp: 8;
-          -webkit-box-orient: vertical;
-          width: 100%;
-          font-size: 1.5rem;
-        }
-      }
-    }
-    .window {
-      position: absolute;
-      @include displayFlex();
-      transform: translate(-50%, -50%);
-      top: 50%;
-      left: 50%;
-      background-color: var(--global-color-background);
-      border: 2px solid var(--global-color-grey-light);
-      width: 92%;
-      height: 87%;
-      z-index: 0;
-      opacity: 0;
-      transition: 0.5s all ease;
-      .video-media {
-        background-image: url("./images/simkunaite/simkunaite-video.jpg");
-        background-position: center;
-        background-size: cover;
-        height: 100%;
-        width: 100%;
-      }
-    }
-    .person-window {
-      @include displayFlex();
-      padding: 3rem;
-
-      .person-photo {
-        width: 40%;
-        height: 100%;
-        background-image: url("./images/simkunaite/simkunaite1.jpg");
-        background-position: center;
-        background-size: cover;
-        margin-right: 3rem;
-      }
-      .person-text {
-        width: 60%;
-        height: 100%;
-        text-align: justify;
-        h1 {
-          margin-bottom: 2rem;
-          font-size: 3rem;
-        }
-        p {
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-line-clamp: 15;
-          -webkit-box-orient: vertical;
-          width: 100%;
-          font-size: 1.5rem;
-        }
-      }
-    }
-    .window-opened {
-      z-index: 2;
-      opacity: 1;
-    }
+@keyframes image-carousel-animation {
+  0% {
+    left: 0;
+  }
+  20% {
+    left: 0;
+  }
+  25% {
+    left: -100%;
+  }
+  45% {
+    left: -100%;
+  }
+  50% {
+    left: -200%;
+  }
+  70% {
+    left: -200%;
+  }
+  75% {
+    left: -300%;
+  }
+  95% {
+    left: -300%;
+  }
+  100% {
+    left: -400%;
   }
 }
