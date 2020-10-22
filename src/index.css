@@ -86,10 +86,8 @@ body {
   width: 100%;
   height: 100vh;
   position: relative;
-}
-
-.content-wrapper .page-start {
-  background-color: black;
+  background-color: #faeed4;
+  overflow: hidden;
 }
 
 .content-wrapper .page-wrapper {
@@ -110,6 +108,87 @@ body {
 .content-wrapper .page-wrapper-animation {
   opacity: 1;
   z-index: 2;
+}
+
+.hand-image {
+  z-index: 10;
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  width: 20rem;
+  height: 20rem;
+  background-image: url("./images/hand.svg");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  -webkit-transition: 1s all ease;
+  transition: 1s all ease;
+  opacity: 0;
+  -webkit-animation-duration: 10s;
+          animation-duration: 10s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+.hand-image-animation {
+  -webkit-animation-delay: 30s;
+          animation-delay: 30s;
+  -webkit-animation-name: hand-animation;
+          animation-name: hand-animation;
+}
+
+@-webkit-keyframes hand-animation {
+  0% {
+    -webkit-transform: translate(-50%, 0%);
+            transform: translate(-50%, 0%);
+    opacity: 0.5;
+  }
+  25% {
+    -webkit-transform: translate(-190%, -70%) rotate(-45deg);
+            transform: translate(-190%, -70%) rotate(-45deg);
+  }
+  50% {
+    -webkit-transform: translate(-50%, 0%);
+            transform: translate(-50%, 0%);
+  }
+  75% {
+    -webkit-transform: translate(100%, -70%) rotate(45deg);
+            transform: translate(100%, -70%) rotate(45deg);
+  }
+  100% {
+    -webkit-transform: translate(-50%, 0%);
+            transform: translate(-50%, 0%);
+    opacity: 0.5;
+  }
+}
+
+@keyframes hand-animation {
+  0% {
+    -webkit-transform: translate(-50%, 0%);
+            transform: translate(-50%, 0%);
+    opacity: 0.5;
+  }
+  25% {
+    -webkit-transform: translate(-190%, -70%) rotate(-45deg);
+            transform: translate(-190%, -70%) rotate(-45deg);
+  }
+  50% {
+    -webkit-transform: translate(-50%, 0%);
+            transform: translate(-50%, 0%);
+  }
+  75% {
+    -webkit-transform: translate(100%, -70%) rotate(45deg);
+            transform: translate(100%, -70%) rotate(45deg);
+  }
+  100% {
+    -webkit-transform: translate(-50%, 0%);
+            transform: translate(-50%, 0%);
+    opacity: 0.5;
+  }
 }
 
 .change-page-buttons {
@@ -174,8 +253,19 @@ body {
   height: 100%;
 }
 
-.info-containers .hand-image {
-  z-index: 10;
+.info-containers .reset-box-container {
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  z-index: 15;
+  width: 100vw;
+  height: 100vh;
+  top: -50%;
+}
+
+.info-containers .reset-box-container .reset-box {
   position: absolute;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
@@ -183,67 +273,40 @@ body {
   left: 50%;
   width: 20rem;
   height: 20rem;
-  background-image: url("./images/hand.svg");
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  -webkit-transition: 1s all ease;
-  transition: 1s all ease;
-  opacity: 0.6;
-  -webkit-animation-name: hand-animation;
-          animation-name: hand-animation;
-  -webkit-animation-duration: 10s;
-          animation-duration: 10s;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
 }
 
-@-webkit-keyframes hand-animation {
-  0% {
-    -webkit-transform: translate(-50%, 0%);
-            transform: translate(-50%, 0%);
-  }
-  25% {
-    -webkit-transform: translate(-190%, -70%) rotate(-45deg);
-            transform: translate(-190%, -70%) rotate(-45deg);
-  }
-  50% {
-    -webkit-transform: translate(-50%, 0%);
-            transform: translate(-50%, 0%);
-  }
-  75% {
-    -webkit-transform: translate(100%, -70%) rotate(45deg);
-            transform: translate(100%, -70%) rotate(45deg);
-  }
-  100% {
-    -webkit-transform: translate(-50%, 0%);
-            transform: translate(-50%, 0%);
-  }
+.info-containers .reset-box-container .reset-box-bottom {
+  -webkit-transform: translate(-50%, -100%);
+          transform: translate(-50%, -100%);
+  width: 100vw;
+  height: 2rem;
+  top: 200%;
 }
 
-@keyframes hand-animation {
-  0% {
-    -webkit-transform: translate(-50%, 0%);
-            transform: translate(-50%, 0%);
-  }
-  25% {
-    -webkit-transform: translate(-190%, -70%) rotate(-45deg);
-            transform: translate(-190%, -70%) rotate(-45deg);
-  }
-  50% {
-    -webkit-transform: translate(-50%, 0%);
-            transform: translate(-50%, 0%);
-  }
-  75% {
-    -webkit-transform: translate(100%, -70%) rotate(45deg);
-            transform: translate(100%, -70%) rotate(45deg);
-  }
-  100% {
-    -webkit-transform: translate(-50%, 0%);
-            transform: translate(-50%, 0%);
-  }
+.info-containers .reset-box-container .reset-box-top {
+  -webkit-transform: translate(-50%, 0%);
+          transform: translate(-50%, 0%);
+  width: 100vw;
+  height: 2rem;
+  top: 100%;
+}
+
+.info-containers .reset-box-container .reset-box-left {
+  -webkit-transform: translate(0%, -50%);
+          transform: translate(0%, -50%);
+  width: 2rem;
+  height: 100vh;
+  left: 0;
+  top: 150%;
+}
+
+.info-containers .reset-box-container .reset-box-right {
+  -webkit-transform: translate(-100%, -50%);
+          transform: translate(-100%, -50%);
+  width: 2rem;
+  height: 100vh;
+  left: 100%;
+  top: 150%;
 }
 
 .info-containers .window {
@@ -269,7 +332,7 @@ body {
   height: 100%;
   z-index: 1;
   opacity: 0;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: var(--global-color-background);
   -webkit-transition: 0.6s all ease;
   transition: 0.6s all ease;
 }
@@ -308,13 +371,6 @@ body {
   padding: 2rem 2.8rem;
 }
 
-.info-containers .window .window-content .video-screen {
-  width: 90%;
-  height: 70%;
-  background-position: center;
-  background-size: cover;
-}
-
 .info-containers .window .window-content .content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -342,7 +398,7 @@ body {
   -webkit-transition: 0.5s all ease;
   transition: 0.5s all ease;
   margin-bottom: 1rem;
-  margin-left: 0.3rem;
+  margin-right: 0.3rem;
   z-index: -1;
 }
 
@@ -396,6 +452,12 @@ body {
   background-size: cover;
 }
 
+.info-containers .window .window-content .content .image-container-animation {
+  -webkit-transition-delay: 1s;
+          transition-delay: 1s;
+  z-index: 3;
+}
+
 .info-containers .window .window-content .content .text-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -425,13 +487,12 @@ body {
   overflow: hidden;
   -webkit-transition: 0.5s all ease;
   transition: 0.5s all ease;
-  padding: 5rem;
+  padding: 5rem 2.5rem;
 }
 
 .info-containers .window .window-content .content .text-container h1 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  margin-top: 1rem;
   text-align: center;
   width: 100%;
 }
@@ -469,7 +530,7 @@ body {
           transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
-  top: 82%;
+  top: 81%;
   width: 100%;
   z-index: -1;
   display: -webkit-box;
@@ -507,14 +568,14 @@ body {
   width: 50%;
   height: 17rem;
   font-size: 2rem;
-  padding-bottom: 7%;
+  padding-bottom: 11%;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
 }
 
 .info-containers .window .window-buttons .btn .hover-box {
-  height: 36%;
+  height: 31%;
   width: 65%;
   -webkit-transition: 0.5s all ease;
   transition: 0.5s all ease;
@@ -526,15 +587,15 @@ body {
 }
 
 .info-containers .window .window-buttons .btn .hover-box-right {
-  width: 84%;
-  margin-left: 1%;
+  width: 87%;
+  margin-left: 3%;
 }
 
 .info-containers .window .window-buttons .btn:hover .hover-box {
   border: 6px solid black;
 }
 
-.info-containers .window .window-buttons-animation {
+.info-containers .window-buttons-animation {
   -webkit-transition-delay: 3s;
           transition-delay: 3s;
   z-index: 3 !important;
@@ -545,15 +606,48 @@ body {
   height: 100%;
 }
 
-.info-containers .window-movie .window-content {
-  background-color: black;
+.info-containers .window-movie .window-content .video-screen {
+  width: 95%;
+  height: 64%;
+  opacity: 0;
+  -webkit-transition: 1s all ease;
+  transition: 1s all ease;
+  background-position: center;
+  background-size: cover;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+}
+
+.info-containers .window-movie .window-content .video-screen video {
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-transform: scale(1.12) translateY(0%);
+          transform: scale(1.12) translateY(0%);
+}
+
+.info-containers .window-movie .window-content .video-screen-open {
+  -webkit-transition-delay: 3s;
+          transition-delay: 3s;
+  opacity: 1;
 }
 
 .info-containers .window-movie .window-buttons-movie {
   -webkit-transform: translate(-50%, -100%);
           transform: translate(-50%, -100%);
   top: 94%;
-  width: 50%;
+  width: 80%;
   height: 13rem;
 }
 
@@ -576,6 +670,10 @@ body {
   font-size: 3rem;
 }
 
+.info-containers .window-movie .window-buttons-movie .btn:nth-child(2) {
+  margin: 0 4rem;
+}
+
 .info-containers .window-opened {
   z-index: 2;
   opacity: 1;
@@ -594,21 +692,6 @@ body {
   width: 100%;
   height: 100%;
   z-index: 1;
-}
-
-.info-containers-plants .video-container .hand-image {
-  position: absolute;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  width: 40rem;
-  height: 40rem;
-  background-image: url("./images/hand.svg");
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  opacity: 0.6;
 }
 
 .info-containers-plants .video-container video {
@@ -694,15 +777,16 @@ body {
   transition: 1s all ease;
   border: 3px solid transparent;
   z-index: 2;
-  padding: 1.9%;
+  padding: 2.4%;
 }
 
 .info-containers-plants .container-zones .plants-wrapper .plant .hover-box {
   height: 82%;
-  width: 36.5%;
+  width: 37.3%;
   -webkit-transition: 0.5s all ease;
   transition: 0.5s all ease;
-  border: 10px solid transparent;
+  border: 40px solid transparent;
+  opacity: 0.5;
 }
 
 .info-containers-plants .container-zones .plants-wrapper .plant1,
@@ -808,7 +892,7 @@ body {
 .info-containers-plants .corner-videos-container .video-box {
   position: absolute;
   height: 50%;
-  width: 45%;
+  width: 50%;
   overflow: hidden;
 }
 

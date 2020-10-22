@@ -3,6 +3,10 @@ import InfoContainers from "./components/InfoContainers";
 import ChangePageButtons from "./components/ChangePageButtons";
 import { connect } from "react-redux";
 
+import forrestSound from "./sounds/forrest.wav";
+import meadowSound from "./sounds/meadow.wav";
+import gardenSound from "./sounds/garden.wav";
+
 import "./App.css";
 //"homepage": "http://https://robertasliekis.github.io/zolynu-paslaptys/",
 //"homepage": "http://localhost:3000/",
@@ -24,7 +28,17 @@ class App extends React.Component {
       <div className="App">
         <div className="content-wrapper">
           <ChangePageButtons />
-          <div className={"page-wrapper page-start " + this.addClassAnimation(-1)}></div>
+          {/* <div>
+            <audio loop ref={this.audioForrestRef}>
+              <source src={forrestSound}></source>
+            </audio>
+            <audio loop ref={this.audioMeadowRef}>
+              <source src={meadowSound}></source>
+            </audio>
+            <audio loop ref={this.audioGardenRef}>
+              <source src={gardenSound}></source>
+            </audio>
+          </div> */}
           {pageCount.map((page, index) => {
             return (
               <div
@@ -32,6 +46,14 @@ class App extends React.Component {
                 className={
                   "page-wrapper plant-page page" + page + " " + this.addClassAnimation(page)
                 }
+                // style={{
+                //   display:
+                //     this.props.pageNumber === page ||
+                //     this.props.pageNumber === page - 1 ||
+                //     this.props.pageNumber === page + 1
+                //       ? "flex"
+                //       : "none",
+                // }}
               >
                 <InfoContainers page={page} />
               </div>
